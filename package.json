@@ -1,0 +1,15 @@
+{
+  "name": "Scrim-s01jgtk",
+  "description": "https://v2.scrimba.com/learn-typescript-c0l/~01i",
+  "scripts": {
+    "watch": "webpack -w",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "webpack": "^2.0"
+  },
+  "devDependencies": {
+    "ts-loader": "*",
+    "typescript": "*"
+  }
+}
