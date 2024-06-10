@@ -1,27 +1,49 @@
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 module.exports = {
-  "output": {
-    "filename": "[name].pack.js"
+  entry: './src/index.ts',
+  output: {
+    filename: 'index.pack.js',
+    path: path.resolve(__dirname, 'dist'),
   },
-  "resolve": {
-    "extensions": [
-      "ts",
-      ".js",
-      ".json"
-    ],
-    "alias": {}
+  resolve: {
+    extensions: ['.ts', '.js'],
   },
-  "module": {
-    "rules": [
+  module: {
+    rules: [
       {
-        "use": {
-          "loader": "ts-loader"
-        },
-        "exclude": /node_modules/,
-        "test": /\.ts$/
-      }
-    ]
+        test: /\.ts$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        type: 'asset/resource',
+      },
+    ],
   },
-  "entry": {
-    "index": "./index"
-  }
-}
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
+    port: 8082,
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'public/index.html',
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'public/images', to: 'images' },
+        { from: 'public/index.css', to: 'index.css' }  // Ensure CSS file is copied to the dist directory
+      ],
+    }),
+  ],
+};

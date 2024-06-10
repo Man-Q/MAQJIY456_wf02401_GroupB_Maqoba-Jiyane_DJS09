@@ -1,14 +1,22 @@
 // Code Tidy
 
-import { showReviewTotal, populateUser, showDetails, getTopTwoReviews} from './utils'
-import { Permissions , LoyaltyUser } from './enums'
-import { Review, Property } from './interfaces'
-import MainProperty from './classes' 
+import { showReviewTotal, populateUser, showDetails, getTopTwoReviews} from './components/utils'
+import { Permissions , LoyaltyUser } from './components/enums'
+import { Review, Property } from './components/interfaces'
+import MainProperty from './components/classes' 
+
 const propertyContainer = document.querySelector('.properties')
-const reviewContainer = document.querySelector('.reviews')
-const container = document.querySelector('.container')
-const button = document.querySelector('button')
+const reviewContainer = document.querySelector('.reviews') as HTMLElement
+const container = document.querySelector('.container') as HTMLElement
+const button = document.querySelector('button') as HTMLElement
 const footer = document.querySelector('.footer')
+const mainImageContainer = document.querySelector('.main-image')
+
+if (!propertyContainer || !reviewContainer || !container || !button || !footer || !mainImageContainer) {
+    throw new Error('One or more required elements not found in the DOM.');
+}
+
+console.log(propertyContainer)
 
 let isLoggedIn: boolean
 
@@ -127,7 +135,7 @@ function addReviews(array : Review[]) : void {
             card.innerHTML = topTwo[i].stars + ' stars from ' + topTwo[i].name
             reviewContainer.appendChild(card)
         }
-        container.removeChild(button) 
+        // container.removeChild(button) 
     }
 }
 
@@ -147,7 +155,6 @@ let yourMainProperty = new MainProperty(
         date: '12-04-2021'
     }] )
 
-const mainImageContainer = document.querySelector('.main-image')
 const image = document.createElement('img')
 image.setAttribute('src', yourMainProperty.src)
 mainImageContainer.appendChild(image)
