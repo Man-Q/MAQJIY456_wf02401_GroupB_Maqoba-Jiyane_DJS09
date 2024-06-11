@@ -16,8 +16,6 @@ if (!propertyContainer || !reviewContainer || !container || !button || !footer |
     throw new Error('One or more required elements not found in the DOM.');
 }
 
-console.log(propertyContainer)
-
 let isLoggedIn: boolean
 
 // Reviews
@@ -43,8 +41,8 @@ const reviews: Review[] = [
 ]
 
 const you = {
-    firstName: 'Bobby',
-    lastName: 'Brown',
+    firstName: 'Manqoba',
+    lastName: 'Jiyane',
     permissions: Permissions.ADMIN,
     isReturning: true,
     age: 35,
@@ -112,6 +110,8 @@ showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser)
 
 populateUser(you.isReturning, you.firstName)
 
+console.log(properties.length)
+
 // Add the properties
 for (let i = 0; i < properties.length; i++) {
     const card = document.createElement('div')
@@ -135,7 +135,7 @@ function addReviews(array : Review[]) : void {
             card.innerHTML = topTwo[i].stars + ' stars from ' + topTwo[i].name
             reviewContainer.appendChild(card)
         }
-        // container.removeChild(button) 
+        container.removeChild(button) 
     }
 }
 
